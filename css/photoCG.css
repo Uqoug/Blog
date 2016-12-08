@@ -1,0 +1,128 @@
+html,
+body,
+#carousel-example-generic,
+.carousel-inner,
+.carousel-inner div {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+.carousel-inner div:nth-of-type(1) {
+	background-image: url("../img/United States, North America (1).jpg");
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+.carousel-inner div:nth-of-type(2) {
+	background-image: url("../img/RdyMe8KQAV0.jpg");
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+.carousel-inner div:nth-of-type(3) {
+	background-image: url("../img/Wanaka tree.jpg");
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+#carousel-example-generic a {
+	visibility: hidden;
+}
+
+
+
+/*sidebar*/
+#sidebar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	-webkit-transition: all .7s ease;
+	-moz-transition: all .7s ease;
+	-ms-transition: all .7s ease;
+	-o-transition: all .7s ease;
+	transition: all .7s ease;
+}
+#sidebar .button {
+	cursor: pointer;
+	margin: 15px 15px 0px 0px;
+	-webkit-transition: all .7s ease;
+	-moz-transition: all .7s ease;
+	-ms-transition: all .7s ease;
+	-o-transition: all .7s ease;
+	transition: all .7s ease;
+}
+#sidebar .bar {
+	width: 50px;
+	height: 5px;
+	background-color: #F2F2F2;
+	margin-bottom: 10px;
+	-webkit-transition: all .7s ease;
+	-moz-transition: all .7s ease;
+	-ms-transition: all .7s ease;
+	-o-transition: all .7s ease;
+	transition: all .7s ease;
+}
+.active .top {
+	-webkit-transform: translateY(15px) rotateZ(45deg);
+	-moz-transform: translateY(15px) rotateZ(45deg);
+	-ms-transform: translateY(15px) rotateZ(45deg);
+	-o-transform: translateY(15px) rotateZ(45deg);
+	transform: translateY(15px) rotateZ(45deg);
+}
+.active .bottom {
+	-webkit-transform: translateY(-15px) rotateZ(-45deg);
+	-moz-transform: translateY(-15px) rotateZ(-45deg);
+	-ms-transform: translateY(-15px) rotateZ(-45deg);
+	-o-transform: translateY(-15px) rotateZ(-45deg);
+	transform: translateY(-15px) rotateZ(-45deg);
+}
+.active .mid {
+	opacity: 0;
+}
+
+#sidebox {
+	position: absolute;
+	top: 0;
+	right: -350px;
+	bottom: 0;
+	width: 350px;
+	background-color: #0d0e09;
+	-webkit-transition: all .7s ease;
+	-moz-transition: all .7s ease;
+	-ms-transition: all .7s ease;
+	-o-transition: all .7s ease;
+	transition: all .7s ease;
+}
+.slice {
+	margin-right: 350px;
+}
+.box {
+	margin-top: 60px;
+}
+.box li {
+	width: 280px;
+	margin-bottom: 30px;
+	list-style-type: none;
+	text-align: center;
+}
+.box a {
+	font-size: 26px;
+	font-family: "微软雅黑";
+	color: #f2f2f2;
+	position: relative;
+	background: linear-gradient(to bottom, #f2f2f2, #f2f2f2)no-repeat bottom/0px 3px;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	transition: all .5s ease;
+}
+.box a:active,
+.box a:visited,
+.box a:link {
+	text-decoration: none;
+}
+.box a:hover {
+	text-decoration: none;
+	background: linear-gradient(to bottom, #f2f2f2, #f2f2f2)no-repeat bottom/50px 3px;
+}
+.box a:hover {
+	text-decoration: none;
+}
