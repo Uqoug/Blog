@@ -130,6 +130,15 @@ body,
 .logo li {
 	position: absolute;
 	list-style: none;
+	opacity: .5;
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.logo li:hover {
+	opacity: 1;
 }
 .logo li:nth-of-type(1) {
 	right: 150px;
@@ -177,11 +186,11 @@ body,
 .minute {
 	background-color: #fff;
 	width: 3px;
-	height: 45px;
+	height: 55px;
 	position: absolute;
 	right: 50%;
 	top: 50%;
-	margin-top: -45px; 
+	margin-top: -55px; 
 	border-radius: 0% 0% 100% 100%;
 	-webkit-transform-origin: 50% 100%;
 	-moz-transform-origin: 50% 100%;
@@ -205,3 +214,6 @@ body,
 	-ms-transform-origin: 50% 100%;
 	transform-origin: 50% 100%;
 }
+
+
+/*weather*/
