@@ -12,6 +12,7 @@ function clock() {
   $(".minute").css("transform", "rotate(" + a + "deg)");
   $(".second").css("transform", "rotate(" + s + "deg)");
 }
+
 function refreshClock() {
   clock(), setTimeout(refreshClock, 100)
 }

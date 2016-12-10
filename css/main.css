@@ -7,6 +7,9 @@ body,
 	width: 100%;
 	overflow: hidden;
 }
+#carousel-example-generic {
+	z-index: 0;
+}
 .carousel-inner div:nth-of-type(1) {
 	background-image: url("../img/United States, North America (1).jpg");
 	-webkit-background-size: cover;
@@ -29,17 +32,20 @@ body,
 
 
 /*sidebar*/
-#sidebar {
+#sidebar,
+#sidebar-xs {
 	position: absolute;
 	top: 0;
 	right: 0;
+	z-index: 3;
 	-webkit-transition: all .7s ease;
 	-moz-transition: all .7s ease;
 	-ms-transition: all .7s ease;
 	-o-transition: all .7s ease;
 	transition: all .7s ease;
 }
-#sidebar .button {
+#sidebar .button,
+#sidebar-xs .button {
 	cursor: pointer;
 	margin: 15px 15px 0px 0px;
 	-webkit-transition: all .7s ease;
@@ -48,7 +54,8 @@ body,
 	-o-transition: all .7s ease;
 	transition: all .7s ease;
 }
-#sidebar .bar {
+#sidebar .bar,
+#sidebar-xs .bar {
 	width: 50px;
 	height: 5px;
 	background-color: #F2F2F2;
@@ -59,6 +66,7 @@ body,
 	-o-transition: all .7s ease;
 	transition: all .7s ease;
 }
+
 .active .top {
 	-webkit-transform: translateY(15px) rotateZ(45deg);
 	-moz-transform: translateY(15px) rotateZ(45deg);
@@ -83,6 +91,7 @@ body,
 	right: -350px;
 	bottom: 0;
 	width: 350px;
+	z-index: 2;
 	background-color: #0d0e09;
 	-webkit-transition: all .7s ease;
 	-moz-transition: all .7s ease;
@@ -152,11 +161,20 @@ body,
 	right: 102px;
 	bottom: 46px;
 }
-
-
+@media (min-width: 768px) {
+	#sidebar-xs {
+		display: none;
+	}
+}
+@media (max-width: 768px) {
+	#sidebar{
+		display: none;
+	}
+}
 
 /*clock*/
 #clock {
+	z-index: 1;
 	width: 150px;
 	height: 150px;
 	border-radius: 100%;
