@@ -2,9 +2,10 @@ $(".button").on("click", function(){
 	$(this).toggleClass("active");
 	$("#sidebar").add("#sidebox").toggleClass("slice");
   $(".wraper").toggleClass("slice2");
+  $(".back-to-top").toggleClass("slice3");
 })
 
-function clock() { 
+function clock(){ 
   var t = moment(),
       a = t.minutes() * 6,
       o = t.hours() % 12 / 12 * 360 + (a / 12);
@@ -20,8 +21,6 @@ function refreshClock() {
 refreshClock();
 
 $(".btn_artical").on("click",function(){
-  $("html").add("body").add(".wraper").css("overflow","visible");
-  $("#clock").css("opacity","0");
   $.ajax({
     url: "artical.html",
     cache: false,
@@ -29,12 +28,12 @@ $(".btn_artical").on("click",function(){
         $(".wraper").html(html);
     }
   });
+  $(".bar").toggleClass("barColorChange");
+  $("html").add("body").add(".wraper").css("overflow","visible");
+  $("#clock").css("opacity","0");
 })
 
 $(".btn_homepage").on("click",function(){
-  console.log('1');
-  $("html").add("body").add(".wraper").css("overflow","hidden");
-  $("#clock").css("opacity","1");
   $.ajax({
     url: "homepage.html",
     cache: false,
@@ -42,4 +41,24 @@ $(".btn_homepage").on("click",function(){
         $(".wraper").html(html);
     }
   });
+  $("html").add("body").add(".wraper").css("overflow","hidden");
+  $("#clock").css("opacity","1");
+  $(".bar").removeClass("barColorChange");
 })
+
+// back to top
+var $backToTop = $(".back-to-top");
+$backToTop.hide();
+
+
+$(window).on('scroll', function() {
+  if ($(this).scrollTop() > 100) {
+    $backToTop.fadeIn();
+  } else {
+    $backToTop.fadeOut();
+  }
+});
+
+$backToTop.on('click', function() {
+  $("html, body").animate({scrollTop: 0}, 500);
+});
