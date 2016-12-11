@@ -293,10 +293,26 @@ body,
 	font-size: 13px;
 	opacity: .4;
 }
+.textbox .contentWraper {
+	overflow: hidden;
+	height: 150px;
+}
+.textbox .content {
+	border-left: 5px solid #8EE5EE;
+	padding-left: 12px;
+}
+.textbox .readmore {
+	display: block;
+	margin-top: 10px;
+	cursor: pointer;
+}
 .slice2 {
 	margin-left: -200px;
 }
-
+.textbox .showmore {
+	overflow: visible;
+	height: auto;
+}
 /*back to top*/
 .back-to-top {
 	position: fixed;
@@ -308,10 +324,6 @@ body,
 	color: #495A80;
 	background: #E8E8E8;
 	border: 2px solid #495A80;
-	-webkit-transition: all .7s ease;
-	-moz-transition: all .7s ease;
-	-ms-transition: all .7s ease;
-	-o-transition: all .7s ease;
 }
 .back-to-top:hover {
 	cursor: pointer;
