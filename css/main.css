@@ -1,5 +1,11 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+/*carousel*/
 html,
 body,
+.wraper,
 #carousel-example-generic,
 .carousel-inner,
 .carousel-inner div {
@@ -28,13 +34,19 @@ body,
 #carousel-example-generic a {
 	visibility: hidden;
 }
-
+.wraper {
+	-webkit-transition: all .7s ease;
+	-moz-transition: all .7s ease;
+	-ms-transition: all .7s ease;
+	-o-transition: all .7s ease;
+	transition: all .7s ease;
+}
 
 
 /*sidebar*/
 #sidebar,
 #sidebar-xs {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	z-index: 3;
@@ -86,7 +98,7 @@ body,
 }
 
 #sidebox {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: -350px;
 	bottom: 0;
@@ -106,7 +118,7 @@ body,
 	margin-top: 60px;
 }
 .box li {
-	width: 280px;
+	width: 360px;
 	margin-bottom: 30px;
 	list-style-type: none;
 	text-align: center;
@@ -180,7 +192,7 @@ body,
 	border-radius: 100%;
 	border: 4px solid #fff;
 	position: absolute;
-	top: 50px;
+	top: 35px;
 	left: 50px;
 	box-shadow: 0 0 2px 1px #fff,
 				0 0 2px 1px #fff inset;
@@ -234,4 +246,37 @@ body,
 }
 
 
-/*weather*/
+/*article*/
+
+#artical {
+    width: 100%;
+    background-color: #EFEFF3;
+    padding-bottom: 5px;
+}
+#artical .head {
+    width: 100%;
+    height: 200px;
+    background-color: #BDCCF2;
+    border-top: 25px solid #495A80;
+}
+.head p {
+    font-size: 45px;
+    font-weight: bolder;
+    color: #fff;
+    margin-left: 25%;
+    margin-top: 35px;
+    font-family: 'Roboto', sans-serif;
+}
+.textbox {
+    width: 50%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(100,100,100,.1);
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    top: -80px;
+    font-family: 'Roboto', sans-serif;
+}
+.slice2 {
+	margin-left: -200px;
+}

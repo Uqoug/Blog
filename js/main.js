@@ -1,6 +1,7 @@
 $(".button").on("click", function(){
 	$(this).toggleClass("active");
 	$("#sidebar").add("#sidebox").toggleClass("slice");
+  $(".wraper").toggleClass("slice2");
 })
 
 function clock() { 
@@ -17,3 +18,28 @@ function refreshClock() {
   clock(), setTimeout(refreshClock, 100)
 }
 refreshClock();
+
+$(".btn_artical").on("click",function(){
+  $("html").add("body").add(".wraper").css("overflow","visible");
+  $("#clock").css("display","none");
+  $.ajax({
+    url: "artical.html",
+    cache: false,
+    success: function(html){
+        $(".wraper").html(html);
+    }
+  });
+})
+
+$(".btn_homepage").on("click",function(){
+  console.log('1');
+  $("html").add("body").add(".wraper").css("overflow","hidden");
+  $("#clock").css("display","block");
+  $.ajax({
+    url: "homepage.html",
+    cache: false,
+    success: function(html){
+        $(".wraper").html(html);
+    }
+  });
+})

@@ -6,32 +6,37 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link href="favicon.ico" rel="icon" type="image/x-icon">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,300,700' rel='stylesheet' type='text/css'>
 </head> 
 
 <body>
-	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<div class="item active">
+	<div class="wraper">
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+				</div>
+				<div class="item">
+				</div>
+				<div class="item">
+				</div>
 			</div>
-			<div class="item">
-			</div>
-			<div class="item">
-			</div>
+			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				<span class="icon-prev" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				<span class="icon-next" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
 		</div>
-		<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-			<span class="icon-prev" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-			<span class="icon-next" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
 	</div>
+
+
 
 	<div id="sidebar">
 		<div class="button">
@@ -49,8 +54,8 @@
 	</div>
 	<div id="sidebox">
 		<ul class="box">
-			<li><a href="#">首页</a></li>
-			<li><a href="#">文章</a></li>
+			<li class="btn_homepage"><a href="#">首页</a></li>
+			<li class="btn_artical"><a href="#">文章</a></li>
 			<li><a href="#">Uqoug</li>
 		</ul>
 		<ul class="logo">
