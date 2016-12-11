@@ -21,7 +21,7 @@ refreshClock();
 
 $(".btn_artical").on("click",function(){
   $("html").add("body").add(".wraper").css("overflow","visible");
-  $("#clock").css("display","none");
+  $("#clock").css("opacity","0");
   $.ajax({
     url: "artical.html",
     cache: false,
@@ -34,7 +34,7 @@ $(".btn_artical").on("click",function(){
 $(".btn_homepage").on("click",function(){
   console.log('1');
   $("html").add("body").add(".wraper").css("overflow","hidden");
-  $("#clock").css("display","block");
+  $("#clock").css("opacity","1");
   $.ajax({
     url: "homepage.html",
     cache: false,
