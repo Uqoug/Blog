@@ -184,12 +184,15 @@ body,
 	right: 150px;
 	bottom: 50px;
 }
-.logo li:nth-of-type(2) {
-	right: 50px;
+.logo li:nth-of-type(2) {right: 50px;
 	bottom: 50px;
 }
 .logo li:nth-of-type(3) {
 	right: 102px;
+	bottom: 46px;
+}
+.logo li:nth-of-type(4) {
+	right: 200px;
 	bottom: 46px;
 }
 @media (min-width: 768px) {
