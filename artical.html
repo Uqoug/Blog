@@ -23,22 +23,203 @@
         <a class="readmore">Read more...</a>
     </div>
 
+
+
     <div class="textbox">
-        <h3>Just a blog post</h3>
-        <h4>26 October, 2014</h4>
+        <h3>贝塞尔曲线(cubic-bezier)</h3>
+        <h4>13 December, 2016</h4>
         <div class="contentWraper">
-            <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Donec ut libero sed arcu vehicula ultricies a non tortor. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. 
-            Vivamus fermentum semper porta. Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, id fringilla sem nunc vel mi. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci.</div>
-        </div>
+            <div class="content">
+                <h2>简介</h2>
+                <p><code>cubic-bezier</code> 又称<strong>三次贝塞尔</strong>，主要是为 <code>animation</code> 生成速度曲线的函数，规定是 <code>cubic-bezier(&lt;x1&gt;, &lt;y1&gt;, &lt;x2&gt;, &lt;y2&gt;)</code>。</p>
+                <p>我们可以从下图中简要理解一下 <code>cubic-bezier</code>：<br></p><div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-305ff3a5f2e6de1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-305ff3a5f2e6de1c.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                <div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-4016cb02499bb127.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-4016cb02499bb127.jpg?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                <p>从上图我们需要知道的是 <code>cubic-bezier</code> 的取值范围:</p>
+                <ul>
+                <li>P0：默认值 (0, 0)</li>
+                <li><strong>P1：动态取值 (x1, y1)</strong></li>
+                <li><strong>P2：动态取值 (x2, y2)</strong></li>
+                <li>P3：默认值 (1, 1)</li>
+                </ul>
+                <p>我们需要关注的是 P1 和 P2 两点的取值，而其中 <strong><code>X 轴</code></strong>的取值范围是 <strong>0</strong> 到 <strong>1</strong>，当取值超出范围时 <code>cubic-bezier</code> 将失效；<code>Y 轴</code>的取值没有规定，当然也毋须过大。</p>
+                <p>最直接的理解是，将<strong>以一条直线放在范围只有 1 的坐标轴中，并从中间拿出两个点来拉扯（X 轴的取值区间是 [0, 1]，Y 轴任意），最后形成的曲线就是动画的速度曲线</strong>。</p>
+                <h2>使用</h2>
+                <p>在测试例子中：</p>
+                <pre class="hljs xml"><code class="xml"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">html</span> <span class="hljs-attribute">lang</span>=<span class="hljs-value">"zh-cn"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"UTF-8"</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+
+                  <span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
+                    <span class="hljs-class">.animation</span> <span class="hljs-rules">{
+                      <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">50px</span></span></span>;
+                      <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"> <span class="hljs-number">50px</span></span></span>;
+                      <span class="hljs-rule"><span class="hljs-attribute">background-color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#ed3</span></span></span>;
+                      <span class="hljs-rule"><span class="hljs-attribute">-webkit-transition</span>:<span class="hljs-value">  all <span class="hljs-number">2s</span></span></span>;
+                           <span class="hljs-rule"><span class="hljs-attribute">-o-transition</span>:<span class="hljs-value">  all <span class="hljs-number">2s</span></span></span>;
+                              <span class="hljs-rule"><span class="hljs-attribute">transition</span>:<span class="hljs-value">  all <span class="hljs-number">2s</span></span></span>;
+                    }</span>
+                    <span class="hljs-rule"><span class="hljs-attribute">.animation</span>:<span class="hljs-value">hover {
+                      -webkit-transform:  <span class="hljs-function">translateX</span>(<span class="hljs-number">100px</span>)</span></span>;
+                          <span class="hljs-rule"><span class="hljs-attribute">-ms-transform</span>:<span class="hljs-value">  <span class="hljs-function">translateX</span>(<span class="hljs-number">100px</span>)</span></span>;
+                           <span class="hljs-rule"><span class="hljs-attribute">-o-transform</span>:<span class="hljs-value">  <span class="hljs-function">translateX</span>(<span class="hljs-number">100px</span>)</span></span>;
+                              <span class="hljs-rule"><span class="hljs-attribute">transform</span>:<span class="hljs-value">  <span class="hljs-function">translateX</span>(<span class="hljs-number">100px</span>)</span></span>;
+                    }
+                  </span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"animation"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span></code></pre>
+                <p>我们可以在浏览器中看到，当鼠标移到元素上时，元素开始向右移动，开始比较慢，之后则比较快，移开时按原曲线回到原点。</p>
+                <p>在例子中，当我们不为 <code>transition</code> 添加 <code>cubic-bezier</code> 或是其他 <code>timing-function</code> 时，默认的速度曲线是 <code>ease</code>，此时的速度曲线是：<br></p><div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-7133cc54005d7db9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-7133cc54005d7db9.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                <p>那么让我们在代码中加入 <code>cubic-bezier(.17, .86, .73, .14)</code>：</p>
+                <pre class="hljs css"><code class="css">...
+                <span class="hljs-class">.animation</span> <span class="hljs-rules">{
+                  ...
+                  <span class="hljs-rule"><span class="hljs-attribute">-webkit-transition</span>:<span class="hljs-value">  all <span class="hljs-number">2s</span> <span class="hljs-function">cubic-bezier</span>(.<span class="hljs-number">17</span>, .<span class="hljs-number">86</span>, .<span class="hljs-number">73</span>, .<span class="hljs-number">14</span>)</span></span>;
+                       <span class="hljs-rule"><span class="hljs-attribute">-o-transition</span>:<span class="hljs-value">  all <span class="hljs-number">2s</span> <span class="hljs-function">cubic-bezier</span>(.<span class="hljs-number">17</span>, .<span class="hljs-number">86</span>, .<span class="hljs-number">73</span>, .<span class="hljs-number">14</span>)</span></span>;
+                          <span class="hljs-rule"><span class="hljs-attribute">transition</span>:<span class="hljs-value">  all <span class="hljs-number">2s</span> <span class="hljs-function">cubic-bezier</span>(.<span class="hljs-number">17</span>, .<span class="hljs-number">86</span>, .<span class="hljs-number">73</span>, .<span class="hljs-number">14</span>)</span></span>;
+                }</span>
+                ...</code></pre>
+                <p>再刷新页面观察效果，会看到动画在执行过程中有一段很缓慢的移动，前后的速度相似，此时的运动曲线是：<br></p><div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-6ee8fba9c90fadc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-6ee8fba9c90fadc2.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                <h2>几个常用的固定值对应的 <code>cubic-bezier</code> 值以及速度曲线</h2>
+                <ol>
+                <li>
+                <p><code>ease</code>：cubic-bezier(.25, .1, .25, 1)<br></p>
+                <div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-0b39ead91c56336a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-0b39ead91c56336a.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                </li>
+                <li>
+                <p><code>liner</code>：cubic-bezier(0, 0, 1, 1) / cubic-bezier(1, 1, 0, 0)<br></p>
+                <div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-122c3034edee633a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-122c3034edee633a.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                </li>
+                <li>
+                <p><code>ease-in</code>：cubic-bezier(.42, 0, 1, 1)<br></p>
+                <div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-ed0d33c50459a794.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-ed0d33c50459a794.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                </li>
+                <li>
+                <p><code>ease-out</code>：cubic-bezier(0, 0, .58, 1)<br></p>
+                <div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-4a4e124f43dbb7e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-4a4e124f43dbb7e8.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                </li>
+                <li>
+                <p><code>ease-in-out</code>：cubic-bezier(.42, 0, .58, 1)<br></p>
+                <div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-5477bd72ef8cc2d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-5477bd72ef8cc2d0.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                </li>
+                <li>
+                <p>In Out . Back（来回的缓冲效果）：cubic-bezier(0.68, -0.55, 0.27, 1.55)<br></p>
+                <div class="image-package imagebubble" widget="ImageBubble">
+                <img src="http://upload-images.jianshu.io/upload_images/741039-6cedf3a50d37a702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/741039-6cedf3a50d37a702.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"><br><div class="image-caption"></div>
+                </div>
+                </li>
+                </ol>
+                <h1>效果参考</h1>
+                <p>文章所提到的动画效果可以在下面站点中看到，当然你也可以大胆尝试：</p>
+                <ul>
+                <li><a href="http://cubic-bezier.com/#.17,.67,.83,.67" target="_blank">英文版在线预览（Lea Verou）</a></li>
+                <li><a href="http://yisibl.github.io/cubic-bezier/#.17,.67,.83,.67" target="_blank">中文版在线预览（更多效果）</a></li>
+                <li><a href="http://xuanfengge.com/easeing/ceaser/" target="_blank">在线生成系列</a></li>
+                <li><a href="https://github.com/jovey-zheng/loader" target="_blank">作者的《Loading》库</a></li>
+                </ul>
+                <h1>参考</h1>
+                <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/timing-function" target="_blank">MDN</a><br><a href="http://www.w3school.com.cn/cssref/pr_animation-timing-function.asp" target="_blank">W3School</a></p>
+                </div>
+            </div>
         <a class="readmore">Read more...</a>
     </div>
 
+
+
     <div class="textbox">
-        <h3>Just a blog post</h3>
-        <h4>26 October, 2014</h4>
+        <h3>搬瓦工VPS/OPENVZ加速利器FINALSPEED</h3>
+        <h4>14 December, 2016</h4>
         <div class="contentWraper">
-            <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Donec ut libero sed arcu vehicula ultricies a non tortor. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. 
-            Vivamus fermentum semper porta. Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, id fringilla sem nunc vel mi. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci.</div>
+            <div class="content">
+                <div>
+                <div>FinalSpeed是高速双边加速软件,可加速所有基于tcp协议的网络服务,在高丢包和高延迟环境下,仍可达到90%的物理带宽利用率,即使高峰时段也能轻松跑满带宽.它的前...</div><p>FinalSpeed是高速双边加速软件,可加速所有基于tcp协议的网络服务,在高丢包和高延迟环境下,仍可达到90%的物理带宽利用率,即使高峰时段也能轻松跑满带宽.它的前身是xsocks，在一台openvz架构vps上测试了一下效果非常明显，简直是咸鱼翻身。所谓双边加速就是服务端和客户端都要安装，PS：这个不是用来扶墙的，而是可以给ss等扶墙工具加速的。所以如果你经济有限，只能买一台<a href="http://www.cmsky.com/bandwagonhost-promo/" target="_blank">搬瓦工</a>vps，但是又苦于晚高峰时的表现，那么FinalSpeed是最适合你的方案了。</p>
+                <p><strong><span style="color: #ff0000;">2016.06.14</span></strong> 发现新的加速工具kcptun，效果和FinalSpeed差不多，更加省资源，请看<a href="http://www.cmsky.com/kcptun/">详细说明</a>。</p>
+                <p><span style="color: #ff0000;">2016.05.30</span> 官方停止了Finalspeed的维护，并推荐使用xsocks。<a href="http://www.ip4a.com/t/944.html" target="_blank" rel="external nofollow">公告:FilnalSpeed停止提供产品和技术支持</a></p>
+                <p>项目Github地址：https://github.com/d1sm/finalspeed</p>
+                <p>论坛：&nbsp;http://www.ip4a.com/c/131.html</p>
+                <h4>一、服务端安装</h4>
+                <p><span style="color: red;">注意问题</span><span style="color: red;">:<br>
+                服务端会启动iptables,如果服务器修改过ssh端口,请先开放ssh端口,否则可能导致ssh连接失败.</span><br>
+                开放端口命令<br>
+                service iptables start<br>
+                iptables -A INPUT -p tcp --dport 你的vps端口号 -j ACCEPT<br>
+                iptables -A OUTPUT -p tcp --sport 你的vps端口号 -j ACCEPT<br>
+                service iptables save</p>
+                <p>一键安装，一键脚本非常方便，我在debian7上安装很顺利<br>
+                rm -f install_fs.sh<br>
+                wget &nbsp;https://github.com/dupontjoy/customization/raw/master/Rules/Shadowsocks/Finalspeed/install_fs.sh<br>
+                chmod +x install_fs.sh<br>
+                ./install_fs.sh 2&gt;&amp;1 | tee install.log</p>
+                <p><a href="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed1.png" rel="img" class="fancybox" target="_blank"><img class="alignnone size-full wp-image-2502" src="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed1.png" alt="FinalSpeed" width="356" height="140"></a></p>
+                <p>如图所示就是安装成功的，FinalSpeed is running.正在运行。运行正常可以直接看<strong>第二步</strong>。</p>
+                <p>debian,ubuntu下如果执行脚本出错,请切换到dash,<br>
+                切换方法: sudo dpkg-reconfigure dash 选no</p>
+                <p>更新<br>
+                执行一键安装会自动完成更新.</p>
+                <p>卸载<br>
+                sh /fs/stop.sh ; rm -rf /fs</p>
+                <p>启动<br>
+                sh /fs/start.sh</p>
+                <p>停止<br>
+                sh /fs/stop.sh</p>
+                <p>重新启动<br>
+                sh /fs/restart.sh</p>
+                <p>日志<br>
+                tail -f /fs/server.log</p>
+                <p>设置服务端口<br>
+                默认udp 150和tcp 150 ,由于finalspeed的工作原理,请不要在本机防火墙开放finalspeed所使用的tcp端口.<br>
+                mkdir -p /fs/cnf/ ; echo 端口号 &gt; /fs/cnf/listen_port ; sh /fs/restart.sh</p>
+                <p>设置开机启动<br>
+                chmod +x /etc/rc.local<br>
+                vi /etc/rc.local<br>
+                加入<br>
+                sh /fs/start.sh</p>
+                <p>每天晚上3点自动重启<br>
+                crontab -e<br>
+                加入<br>
+                0 3 * * *&nbsp;&nbsp;sh /fs/restart.sh</p>
+                <h4>二、客户端设置</h4>
+                <span class="download"><a title="FinalSpeed" href="https://cdn.stackstorage.com/index.php/s/LpBfftIHrihI3TW" target="_blank">Windows客户端下载</a></span>
+                <p>1.服务器必须同时部署FinalSpeed服务端才能进行加速.<br>
+                2.客户端必须准确设置物理带宽,最终加速的速度不会超过所设置的带宽值,如果设置值高于实际物理带宽会造成丢包和不必要的重传.<br>
+                3.客户端首选udp协议,如果udp不稳定,请切换到tcp.<br>
+                4.若服务器为<span style="color: #ff0000;">openvz</span>架构（比如搬瓦工）,客户端只能选择udp协议,其他架构同时支持tcp和udp协议.<br>
+                5.windows客户端使用tcp协议时不兼容锐速,停止锐速后可以正常运行.</p>
+                <p><span style="color: black;"><strong>加速ss教程（前提是你本地ss已经测试过没问题）</strong></span><br>
+                假设服务器IP为10.10.10.10,finalspeed端口为默认150,ss端口为8989.<br>
+                加速前提ss服务端运行正常,ss客户端也能正常登录.<br>
+                1.运行FinalSpeed客户端,填写服务器地址 10.10.10.10 .设置带宽，根据你实际带宽设置，比如我这里是10M上下行对等光纤。</p>
+                <p><a href="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed2.png" rel="img" class="fancybox" target="_blank"><img class="alignnone size-full wp-image-2503" src="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed2.png" alt="FinalSpeed" width="502" height="328"></a></p>
+                <p>2.点击添加,增加加速端口,加速端口为ss端口8989,如果为其他端口,请相应修改,本地端口任意,这里是2000 .传输协议UDP</p>
+                <p><a href="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed3.png" rel="img" class="fancybox" target="_blank"><img class="alignnone size-full wp-image-2504" src="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed3.png" alt="FinalSpeed" width="502" height="328"></a></p>
+                <p>3.打开ss客户端,添加服务器,服务器IP为127.0.0.1,服务器端口为加速端口对应的本地端口,这里是2000,然后设置你的ss密码,加密方式.</p>
+                <p><a href="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed4.jpg" rel="img" class="fancybox" target="_blank"><img class="alignnone size-full wp-image-2505" src="http://img.cmsky.com/wp-content/uploads/2015/12/finalspeed4.jpg" alt="FinalSpeed" width="512" height="337"></a></p>
+                <p>4.确定保存,选择使用刚添加的服务器,并设置浏览器代理,成功连接后,FinalSpeed状态栏会出现"连接服务器成功"提示.更多教程访问<a href="http://www.ip4a.com/c/131.html" target="_blank" rel="external nofollow">作者论坛</a>。</p>
+                <p>总结：本人实测如果你服务端是manyuser也可以加速，但是你得让每个端口的用户都装上FinalSpeed，太麻烦。所以这个东东最适合的就是经济有限，只能买个<a href="http://www.cmsky.com/bandwagonhost-promo/" target="_blank">搬瓦工</a>等openvz架构的vps自用的同学。</p>
+                </div>
+            </div>
         </div>
         <a class="readmore">Read more...</a>
     </div>
