@@ -38,7 +38,6 @@ requirejs(["jquery", "moment"], function ($, moment) {
       success: function(html){
           $(".wraper").html(html);
           $(".readmore").on("click",function(){
-            console.log('123');
             $(this).prev(".contentWraper").toggleClass("showmore");
           });
       }
@@ -78,7 +77,7 @@ requirejs(["jquery", "moment"], function ($, moment) {
 
 
   // showmore
-  $(".readmore").on("click",function(){
+$(".readmore").on("click",function(){
     console.log('123');
     $(this).prev(".contentWraper").toggleClass("showmore");
   });
