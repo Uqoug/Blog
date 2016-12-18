@@ -42,7 +42,7 @@ requirejs(["jquery", "moment"], function ($, moment) {
           });
       }
     });
-    $(".bar").toggleClass("barColorChange");
+    $(".bar").addClass("barColorChange");
     $("html").add("body").add(".wraper").css("overflow","visible");
     $("#clock").css("opacity","0");
   })
@@ -64,21 +64,22 @@ requirejs(["jquery", "moment"], function ($, moment) {
   // back to top
   var $backToTop = $(".back-to-top");
   $backToTop.hide();
-  $(window).on('scroll', function() {
+  $(window).on("scroll", function() {
     if ($(this).scrollTop() > 100) {
-      $backToTop.fadeIn("slow");
+      $backToTop.fadeIn();
     } else {
-      $backToTop.fadeOut("slow");
+      $backToTop.fadeOut();
     }
   });
-  $backToTop.on('click', function() {
-    $("html, body").animate({scrollTop: 0}, 500);
+  $backToTop.on("click", function() {
+    if (!$("html, body").is(':animated')) {
+      $("html, body").animate({scrollTop: 0}, 500);
+    }
   });
 
 
   // showmore
 $(".readmore").on("click",function(){
-    console.log('123');
     $(this).prev(".contentWraper").toggleClass("showmore");
   });
 });
