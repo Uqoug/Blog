@@ -3,7 +3,193 @@
         <div class="head"><p>Uqoug</p></div>
     </div>
 
+    <div class="textbox">
+        <h3>localStorage使用方法</h3>
+        <h4>10 January, 2017</h4>
+        <div class="contentWraper">
+            <div class="content">
+                <div id="cnblogs_post_body"><p><span><strong><span style="font-size: 18pt;">一、什么是localStorage、sessionStorage</span></strong></span></p>
+                <p><span>在HTML5中，新加入了一个localStorage特性，这个特性主要是用来作为本地存储来使用的，解决了cookie存储空间不足的问题(cookie中每条cookie的存储空间为4k)，localStorage中一般浏览器支持的是5M大小，这个在不同的浏览器中localStorage会有所不同。</span></p>
+                <p>&nbsp;</p>
+                <p><span><strong><span style="font-size: 18pt;">二、localStorage的优势与局限</span></strong></span></p>
+                <p><strong><span style="font-family: 隶书; font-size: 18px;">localStorage的优势</span></strong></p>
+                <p><span>1、localStorage拓展了cookie的4K限制</span></p>
+                <p><span>2、localStorage会可以将第一次请求的数据直接存储到本地，这个相当于一个5M大小的针对于前端页面的数据库，相比于cookie可以节约带宽，但是这个却是只有在高版本的浏览器中才支持的</span></p>
+                <p><strong><span style="font-family: 隶书; font-size: 18px;">localStorage的局限</span></strong></p>
+                <p><span>1、浏览器的大小不统一，并且在IE8以上的IE版本才支持localStorage这个属性</span></p>
+                <p><span>2、目前所有的浏览器中都会把localStorage的值类型限定为string类型，这个在对我们日常比较常见的JSON对象类型需要一些转换</span></p>
+                <p><span>3、localStorage在浏览器的隐私模式下面是不可读取的</span></p>
+                <p><span>4、localStorage本质上是对字符串的读取，如果存储内容多的话会消耗内存空间，会导致页面变卡</span></p>
+                <p><span>5、localStorage不能被爬虫抓取到</span></p>
+                <p><span>localStorage与sessionStorage的唯一一点区别就是localStorage属于永久性存储，而sessionStorage属于当会话结束的时候，sessionStorage中的键值对会被清空</span></p>
+                <p><span>这里我们以localStorage来分析</span></p>
+                <p>&nbsp;</p>
+                <p><span><strong><span style="font-size: 18pt;">三、localStorage的使用</span></strong></span></p>
+                <p><span>localStorage的浏览器支持情况：</span></p>
+                <p><span><img src="http://images2015.cnblogs.com/blog/728493/201606/728493-20160626102341735-27421870.jpg" alt="" data-bd-imgshare-binded="1"></span></p>
+                <p><span>这里要特别声明一下，如果是使用IE浏览器的话，那么就要UserData来作为存储，这里主要讲解的是localStorage的内容，所以userData不做过多的解释，而且以博主个人的看法，也是没有必要去学习UserData的使用来的，因为目前的IE6/IE7属于淘汰的位置上，而且在如今的很多页面开发都会涉及到HTML5\CSS3等新兴的技术，所以在使用上面一般我们不会去对其进行兼容</span></p>
+                <p><span>首先在使用localStorage的时候，我们需要判断<strong>浏览器是否支持localStorage这个属性</strong></span></p>
+                <div class="cnblogs_code">
+                <pre>
 
+                <span style="color: #0000ff;">if</span><span style="color: #000000;">(！window.localStorage){
+                            alert(</span>"浏览器支持localstorage"<span style="color: #000000;">);
+                            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+                        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">主逻辑业务</span>
+                        }</pre>
+                </div>
+                <p>&nbsp;</p>
+                <p><span>localStorage的写入，<strong>localStorage的写入</strong>有三种方法，这里就一一介绍一下</span></p>
+                <pre>
+                         <span style="color: #0000ff;">if</span><span style="color: #000000;">(！window.localStorage){
+                            alert(</span>"浏览器支持localstorage"<span style="color: #000000;">);
+                            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+                        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                            </span><span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入a字段</span>
+                            storage["a"]=1<span style="color: #000000;">;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入b字段</span>
+                            storage.a=1<span style="color: #000000;">;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入c字段</span>
+                            storage.setItem("c",3<span style="color: #000000;">);
+                            console.log(</span><span style="color: #0000ff;">typeof</span> storage["a"<span style="color: #000000;">]);
+                            console.log(</span><span style="color: #0000ff;">typeof</span> storage["b"<span style="color: #000000;">]);
+                            console.log(</span><span style="color: #0000ff;">typeof</span> storage["c"<span style="color: #000000;">]);
+                        }</span></pre>
+                <p>&nbsp;</p>
+                <p><span>运行后的结果如下：</span></p>
+                <p><span><img src="http://images2015.cnblogs.com/blog/728493/201606/728493-20160626105220610-1095267293.png" alt="" data-bd-imgshare-binded="1"></span></p>
+                <p><span>这里要特别说明一下localStorage的使用也是遵循同源策略的，所以不同的网站直接是不能共用相同的localStorage</span></p>
+                <p><span>最后在控制台上面打印出来的结果是:</span></p>
+                <p><span><img src="http://images2015.cnblogs.com/blog/728493/201606/728493-20160626110312391-621359725.png" alt="" data-bd-imgshare-binded="1"></span></p>
+                <p><span>不知道各位读者有没有注意到，刚刚存储进去的是int类型，但是打印出来却是string类型，这个与localStorage本身的特点有关，localStorage只支持string类型的存储。</span></p>
+                <p><span>localStorage的读取</span></p>
+                <pre><span style="color: #0000ff;">if</span>(!<span style="color: #000000;">window.localStorage){
+                            alert(</span>"浏览器支持localstorage"<span style="color: #000000;">);
+                        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                            </span><span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入a字段</span>
+                            storage["a"]=1<span style="color: #000000;">;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入b字段</span>
+                            storage.a=1<span style="color: #000000;">;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入c字段</span>
+                            storage.setItem("c",3<span style="color: #000000;">);
+                            console.log(</span><span style="color: #0000ff;">typeof</span> storage["a"<span style="color: #000000;">]);
+                            console.log(</span><span style="color: #0000ff;">typeof</span> storage["b"<span style="color: #000000;">]);
+                            console.log(</span><span style="color: #0000ff;">typeof</span> storage["c"<span style="color: #000000;">]);
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">第一种方法读取</span>
+                            <span style="color: #0000ff;">var</span> a=<span style="color: #000000;">storage.a;
+                            console.log(a);
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">第二种方法读取</span>
+                            <span style="color: #0000ff;">var</span> b=storage["b"<span style="color: #000000;">];
+                            console.log(b);
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">第三种方法读取</span>
+                            <span style="color: #0000ff;">var</span> c=storage.getItem("c"<span style="color: #000000;">);
+                            console.log(c);
+                        }</span></pre>
+                <p>&nbsp;</p>
+                <p>这里面是三种对localStorage的读取，其中官方推荐的是getItem\setItem这两种方法对其进行存取，不要问我这个为什么，因为这个我也不知道</p>
+                <p>我之前说过localStorage就是相当于一个前端的数据库的东西，数据库主要是增删查改这四个步骤，这里的读取和写入就相当于增、查的这两个步骤</p>
+                <p>下面我们就来说一说<strong>localStorage的删、改这两个步骤</strong></p>
+                <p>改这个步骤比较好理解，思路跟重新更改全局变量的值一样，这里我们就以一个为例来简单的说明一下</p>
+                <p>&nbsp;</p>
+                <pre><span style="color: #0000ff;">if</span>(!<span style="color: #000000;">window.localStorage){
+                            alert(</span>"浏览器支持localstorage"<span style="color: #000000;">);
+                        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                            </span><span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入a字段</span>
+                            storage["a"]=1<span style="color: #000000;">;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入b字段</span>
+                            storage.b=1<span style="color: #000000;">;
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">写入c字段</span>
+                            storage.setItem("c",3<span style="color: #000000;">);
+                            console.log(storage.a);
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;"> console.log(typeof storage["a"]);</span>
+                            <span style="color: #008000;">//</span><span style="color: #008000;"> console.log(typeof storage["b"]);</span>
+                            <span style="color: #008000;">//</span><span style="color: #008000;"> console.log(typeof storage["c"]);</span>
+                            <span style="color: #008000;">/*</span><span style="color: #008000;">分割线</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+                            storage.a</span>=4<span style="color: #000000;">;
+                            console.log(storage.a);
+                        }</span></pre>
+                <p>&nbsp;</p>
+                <p>这个在控制台上面我们就可以看到已经a键已经被更改为4了</p>
+                <p><strong>localStorage的删除</strong></p>
+                <p>1、将localStorage的所有内容清除</p>
+                <div class="cnblogs_code">
+                <pre><span></span>
+                <span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            storage.a</span>=1<span style="color: #000000;">;
+                            storage.setItem(</span>"c",3<span style="color: #000000;">);
+                            console.log(storage);
+                            storage.clear();
+                            console.log(storage);</span></pre>
+                </div>
+                <p>&nbsp;</p>
+                <p>2、 将localStorage中的某个键值对删除</p>
+                <p>&nbsp;</p>
+                <div class="cnblogs_code">
+                <pre><span></span><span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            storage.a</span>=1<span style="color: #000000;">;
+                            storage.setItem(</span>"c",3<span style="color: #000000;">);
+                            console.log(storage);
+                            storage.removeItem(</span>"a"<span style="color: #000000;">);
+                            console.log(storage.a);</span></pre>
+                </div>
+                <p>&nbsp;</p>
+                <p>控制台查看结果</p>
+                <p><img src="http://images2015.cnblogs.com/blog/728493/201606/728493-20160626115232188-571332017.png" alt="" data-bd-imgshare-binded="1"></p>
+                <p><strong>localStorage的键获取</strong></p>
+                <pre><span></span><span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            storage.a</span>=1<span style="color: #000000;">;
+                            storage.setItem(</span>"c",3<span style="color: #000000;">);
+                            </span><span style="color: #0000ff;">for</span>(<span style="color: #0000ff;">var</span> i=0;i&lt;storage.length;i++<span style="color: #000000;">){
+                                </span><span style="color: #0000ff;">var</span> key=<span style="color: #000000;">storage.key(i);
+                                console.log(key);
+                            }</span></pre>
+                <p>&nbsp;</p>
+                <p>使用key()方法，向其中出入索引即可获取对应的键</p>
+                <p>&nbsp;</p>
+                <p><span><strong><span style="font-size: 18pt;">四、localStorage其他注意事项</span></strong></span></p>
+                <p>&nbsp;一般我们会将JSON存入localStorage中，但是在localStorage会自动将localStorage转换成为字符串形式</p>
+                <p>这个时候我们可以使用JSON.stringify()这个方法，来将JSON转换成为JSON字符串</p>
+                <p>示例：</p>
+                <pre><span style="color: #0000ff;">if</span>(!<span style="color: #000000;">window.localStorage){
+                            alert(</span>"浏览器支持localstorage"<span style="color: #000000;">);
+                        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                            </span><span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            </span><span style="color: #0000ff;">var</span> data=<span style="color: #000000;">{
+                                name:</span>'xiecanyong'<span style="color: #000000;">,
+                                sex:</span>'man'<span style="color: #000000;">,
+                                hobby:</span>'program'<span style="color: #000000;">
+                            };
+                            </span><span style="color: #0000ff;">var</span> d=<span style="color: #000000;">JSON.stringify(data);
+                            storage.setItem(</span>"data"<span style="color: #000000;">,d);
+                            console.log(storage.data);
+                        }</span></pre>
+                <p>&nbsp;</p>
+                <p>读取之后要将JSON字符串转换成为JSON对象，使用JSON.parse()方法</p>
+                <pre><span style="color: #0000ff;">var</span> storage=<span style="color: #000000;">window.localStorage;
+                            </span><span style="color: #0000ff;">var</span> data=<span style="color: #000000;">{
+                                name:</span>'xiecanyong'<span style="color: #000000;">,
+                                sex:</span>'man'<span style="color: #000000;">,
+                                hobby:</span>'program'<span style="color: #000000;">
+                            };
+                            </span><span style="color: #0000ff;">var</span> d=<span style="color: #000000;">JSON.stringify(data);
+                            storage.setItem(</span>"data"<span style="color: #000000;">,d);
+                            </span><span style="color: #008000;">//</span><span style="color: #008000;">将JSON字符串转换成为JSON对象输出</span>
+                            <span style="color: #0000ff;">var</span> json=storage.getItem("data"<span style="color: #000000;">);
+                            </span><span style="color: #0000ff;">var</span> jsonObj=<span style="color: #000000;">JSON.parse(json);
+                            console.log(</span><span style="color: #0000ff;">typeof</span> jsonObj);</pre>
+                <p><img src="http://images2015.cnblogs.com/blog/728493/201606/728493-20160626124919578-638115637.png" alt="" data-bd-imgshare-binded="1"></p>
+                <p>打印出来是Object对象</p>
+                <p>另外还有一点要注意的是，其他类型读取出来也要进行转换</p>
+                <p>&nbsp;</p></div>
+                     
+            </div>
+        </div>
+        <a class="readmore">Read more...</a>
+    </div>
 
 
     <div class="textbox">
@@ -227,19 +413,7 @@
         <a class="readmore">Read more...</a>
     </div>
 
-    <div class="textbox">
-        <h3>Just a blog post</h3>
-        <h4>26 October, 2014</h4>
-        <div class="contentWraper">
-            <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Donec ut libero sed arcu vehicula ultricies a non tortor. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. 
-            Vivamus fermentum semper porta. Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, id fringilla sem nunc vel mi. Quisque mi metus, ornare sit amet ferm
-            entum et, tincidunt et orci.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Donec ut libero sed arcu vehicula ultricies a non tortor. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. 
-            Vivamus fermentum semper porta. Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, id fringilla sem nunc vel mi. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci.
-            </div>
-        </div>
-        <a class="readmore">Read more...</a>
-    </div>
+
 
     <div class="textbox">
         <h3>Just a blog post</h3>
